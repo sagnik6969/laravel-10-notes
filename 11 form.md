@@ -106,7 +106,7 @@
 
 
 
-        // Redirect to another page along with flashing the data to session
+        // Redirect to another page along with flashing the input data to session
 
 
         PREREQUISITES: name that route which you want to redirects to.
@@ -115,7 +115,7 @@
 
         In the oldform file -> the data can be accessed in such a way 
         `
-            {{ namedRoute('attr_name') }}
+            {{ old('attr_name') }}
         `
 
         // Additional Info: Flash except some attributes 

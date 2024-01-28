@@ -104,3 +104,27 @@ Instead of returning an array, return ResourceCollection
    }
 
 }}
+
+## ----> to return an array
+
+{{
+    EventResource::collection(Event::all())
+}}
+
+# ----> Example
+
+{{
+    public function toArray(Request $request): array
+    {
+        // return parent::toArray($request);
+        return [
+           
+            "end_time" => $this->end_time,
+            "user" => new UserResource($this->whenLoaded('user')),
+            "attendees" => AttendeeResource::collection($this->whenLoaded('attendees'))
+            // 'user property will only be present in json if user lis loaded with 'with' from database
+        ];
+    }
+
+
+}}

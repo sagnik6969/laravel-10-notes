@@ -266,7 +266,7 @@ Route:: get( 'home', function(){
 
 
 
------------------------------------------------> Pass a value to the named routes 
+# -----------------------------------------------> Pass a value to the named routes 
 
 Route:: get( 'contact/{_id}', function( $id ) {
     return view( 'contact' , ['cId' => $id ] );
@@ -368,6 +368,13 @@ Route:: get( 'contact/{_id}', function( $id ) {
     
     `if we want specifically search for query we can simply use :` request->query()
 }}
+
+## php artisan route:list => gives a list of all the routes in the application 
+
+-> GET => fetch data
+-> POST => store new data
+-> PUT => modify an existing field
+-> delete => delete data
 
 must visit : `https://laravel.com/docs/10.x/requests#input`;
 

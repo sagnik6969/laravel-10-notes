@@ -111,3 +111,20 @@ Handling errors using sessions is also easy in laravel
 @enderror;
 
 </form>
+
+
+# --> storing session data
+
+// In laravel session starts when user first visits a website and end when 
+// the user closes the browser.
+// When you visit a laravel website for the first time it will store the session id in a cookie
+// in the subsequent requests laravel can recognize the the user through the session id 
+// stored in the cookie.
+// session data is stored inside /storage/framework/session
+// session data is both stored in browser and in server (/storage/framework/session)
+
+// we can configure how the session data is stored inside the server using /config/session.php
+// by default session data is stored in a file. 
+// the problem with files is that files cant be shared between servers.
+// se redis is preferred for storing session data.
+

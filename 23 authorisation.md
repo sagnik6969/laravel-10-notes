@@ -191,7 +191,6 @@ Controller Method	   Policy Method
 
 index	          -       viewAny
 show	          -       view
-create	          -       create
 store	          -       create
 edit	          -       update
 update	          -       update

@@ -21,6 +21,13 @@ In the database/factories : We will get our factory file, now inside a definitio
         ];
     }
 
+    public function without_long_description(): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'long_description' => null,
+        ]);
+    }
+
 }}
 
 Now to execute this factory we need a seederFile.

@@ -50,7 +50,7 @@ If we want to rollback last 5 migrations then we can do so using `--step=5` tag
 final cmd: `php artisan migrate:rollback --step=5`
 
 Migrate all commands use reset
-final cmd: `php artisan migrate:reset`
+final cmd: `php artisan migrate:reset` => reverses all the migrations
 
 Rollback and Migrate Together
 final cmd: `php artisan migrate:refresh`
@@ -112,7 +112,7 @@ $ CHECKING TABLES AND COLUMNS $
 We can check existence of a table and a column using hasTable([param]) and hasColumn([params]) respectively;
 
 {{
-    if( Schema::hasTable('tableName') && Schema::hasColumn('columnName') )
+    if( Schema::hasTable('tableName') && Schema::hasColumn('tableName','columnName') )
     {
         // both returns a boolean value
     }  

@@ -189,7 +189,7 @@ Guest Directive
 
 }}
 
-------------------------------------------> Break and continue 
+# ------------------------------------------> Break and continue 
 
 `@break`
 
@@ -206,7 +206,7 @@ syntax 2: continue( condn )
 
 
 
-------------------------------------------> class directive
+# *****------------------------------------------> class directive
 
 {{
 

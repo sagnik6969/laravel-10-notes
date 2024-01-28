@@ -16,7 +16,7 @@ cmd: `php artisan make:model ModelName -f` ( Create model along with its factory
 cmd: `php artisan make:model ModelName -s` ( Create model along with its seeder file )
 cmd: `php artisan make:model ModelName -c` ( Create model along with its controller file )
 
-cmd: `php artisan make:model ModelName -mf` ( Create model along with its migration & controller file )
+cmd: `php artisan make:model ModelName -mf` ( Create model along with its migration & factory file )
 ...
 
 cmd: `php artisan make:model ModelName -mfsc` ( gives all )
@@ -107,6 +107,15 @@ Route Model binding provides us opportunity to do it in a single move.
     // in the route still we have to pass the id.
 }}
 
+# if primary key anything other than id then for route model binding to work
+
+{{
+     public function getRouteKeyName()
+    {
+        return 'key_name';
+    }
+}}
+
 
 
 # IMPORTANT: To enable mass assignment feature we need to explicitly enable it in the respective model.
@@ -148,3 +157,93 @@ class Task extends Model
     Student::name('shivang')->get();
     // Above query is same as = Student::where('name', 'LIKE', '%{$title}%' )->get();      
 }}
+
+# -----> write `->toSql()`in place of get to get the sql query
+
+# ----> Agreegation
+
+{{
+    // to get books with review count
+    App\Models\Book::withCount('reviews')->get();
+
+    //to get most recent 3 books with review count
+    Book::withCount('reviews')->latest()->limit(3)->get(); 
+    //limit works on query builders
+    //take works on both query builders and laravel collections
+    //in case of query builders take is just alias to limit 
+
+
+   // order in which you call different query builder 
+    //methods does not matter (** important)
+
+   // To get books with highest average rating
+    Book::withAvg('reviews','rating')->orderBy('reviews_avg_rating','desc')->limit(5)->get();
+    Book::withCount('reviews')->having('reviews_count','>=','10')->withAvg('reviews','rating')->orderBy('reviews_avg_rating')
+    
+    //To find the Books with max rating which has at least 10 reviews 
+    App\Models\Book::withCount('reviews')->having('reviews_count','>=','10')->withAvg('reviews','rating')->orderBy('reviews_avg_rating'
+    ,'desc')->limit(4)->get()
+}}
+
+#  => The order in which you call the query builder functions does not matter.
+# => but it is not always the case if you use order by the first order by takes precedence over 2nd order by.
+# => App\Models\Book::popular()->highestRated()
+# popular(), highestRated() => are custom query builder functions
+
+# ----> TO filter agreegation queries
+{{
+     $query
+            ->withCount([
+                'reviews' =>
+                    fn(Builder $q) => $this->dateRangeFilter($q, $from, $to)
+            ])
+            ->orderBy('reviews_count', 'DESC');
+}}
+
+{{
+     return $query
+            ->withAvg([
+                'reviews' =>
+                    fn(Builder $q) => $this->dateRangeFilter($q, $from, $to)
+            ], 'rating')
+            ->orderBy('reviews_avg_rating', 'DESC');
+}}
+
+# ----> TO filter load
+
+{{
+     $book->load([
+            'reviews' => function ($query) {
+                $query->latest();
+            }
+        ]);
+}}
+
+# ----> when
+
+{{
+     $books = Book::when(
+            $title, function ($query, $title) {
+                $query->title($title);
+            }
+            // title is a custom filter defined in Book model
+        )
+}}
+
+# ----> load with agreegation
+
+{{
+    $book->loadAvg('reviews', 'rating');
+}}
+
+# ----> to run queries on lazy loaded relations
+
+# use () => to run queries / create new record 
+
+{{
+        $attendees = $event->attendees()->latest()->paginate(2);
+
+}}
+
+
+

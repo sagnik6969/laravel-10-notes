@@ -36,7 +36,7 @@ Examples:
 
 
 
-$INSERT$
+$ INSERT $
 
 Syntax: insert( 'sql_query', [params] );
 Examples:
