@@ -24,3 +24,6 @@ A soft link has been created from storage/app/public to another folder where use
 
 
 }}
+
+<!-- php artisan storage:link -->
+<!-- to create a soft link between public directory and public folder -->

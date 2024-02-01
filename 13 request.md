@@ -41,6 +41,8 @@ function create( TaskRequest $req )
 {
 
         // Will tell that rules are validated successfully and pass the form data to $data variable
+        // note --> validation will be done before the first line of the route gets executed.
+        // the next line will only be used to get the validated data. 
         $data = $req->validated();
 
         $task = new Task;                                                                            $

@@ -1,4 +1,4 @@
-# ----> to throw a dalidation exception
+# ----> to throw a validation exception
 
 {{
     throw ValidationException::withMessages([

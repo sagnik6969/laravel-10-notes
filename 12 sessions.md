@@ -128,3 +128,13 @@ Handling errors using sessions is also easy in laravel
 // the problem with files is that files cant be shared between servers.
 // se redis is preferred for storing session data.
 
+# ---->to get query params of prev request inside blade
+
+{{
+    request('min_salary')
+}}
+
+# @checked
+{{
+    @checked(request('experience') == 'seiner')
+}}

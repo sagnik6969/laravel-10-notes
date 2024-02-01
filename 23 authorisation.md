@@ -220,6 +220,8 @@ class PostController extends Controller
 SIMPLY USE POLICIES INSIDE CONTROLLERS
 
 {{
+        $this->authorize('viewAny', [$attendee]);
+
 
     link: `https://laravel.com/docs/10.x/authorization#via-the-user-model`
 }}

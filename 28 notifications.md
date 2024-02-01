@@ -86,3 +86,15 @@ $user->notify(new NotificationName( $instance ));
     
     Notification::send( $users, new NotificationName() );
 }}
+
+# ----> notification via mail
+
+{{
+    public function toMail(object $notifiable): MailMessage
+    {
+        return (new MailMessage)
+            ->line('Reminder: you have an upcoming event')
+            ->action('View Event', route('events.show', ['event' => $this->event->id]))
+            ->line("The event {$this->event->name} starts at {$this->event->start_time}");
+    }
+}}

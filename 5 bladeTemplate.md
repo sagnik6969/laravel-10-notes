@@ -206,7 +206,7 @@ syntax 2: continue( condn )
 
 
 
-# *****------------------------------------------> class directive
+# ************************ ------------------------------------------> class directive
 
 {{
 
@@ -298,3 +298,32 @@ ex:
         .....
 @endphp
 
+# ----> To use slot inside blade component
+-> similar to slot in vue
+
+{{
+    <div>
+        {{ $slot }}
+    </div>
+}}
+
+# to pass props to blade component
+
+<x-job-card :job="$job">
+            <div class="mt-4">
+                <x-link-button :href="route('jobs.show', ['job' => $job])">
+                    Show
+                </x-link-button>
+            </div>
+</x-job-card>
+{{
+
+    -> When the component is created without --view flag the attributes (eg :links) are passed to
+    -> the constructor not directly to the view (which is the case of we use --view flag)
+    -> we have to receive the attributes in the constructor (like the above) to use then inside
+    -> the component
+
+    -> one mode thing => the attributes which are not specified in the constructor will be 
+    -> added to $attributes in the component in this example (class="mb-4")
+
+}}

@@ -226,3 +226,9 @@ EXAMPLE
         $table->integer('id')->default(10);                                                               $
     })
 }}
+
+# To drop foreign kry
+
+{{
+    \$table->dropForeignIdFor(Employer::class);
+}}
